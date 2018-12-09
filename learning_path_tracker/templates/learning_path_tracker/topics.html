@@ -1,0 +1,21 @@
+{% extends "learning_path_tracker/base.html" %}
+{% block content %}
+	<div class="card border-info mx-auto mt-custom" style="max-width: 50rem;">
+		<div>
+			<h5 class="card-title info text-center my-3">All the goals that you take..</h5>
+			<a class="btn btn-outline-info btn-custom float-right mr-3" href="{% url 'learning_path_tracker:new_topic' %}" role="button">New goal</a>
+		</div>
+	  <div class="card-body">
+			<ul class="list-group list-group-flush">
+				{% for topic in topics %}
+					<li class="list-group-item">
+						<a href="{% url 'learning_path_tracker:topic' topic.id %}" class="info">
+							{{topic}}
+						</a>
+					</li>
+			  	{% empty %}
+			  		<a href="#" class="list-group-item">No topics have been added yet.</a>
+				{% endfor %}
+			</ul>
+	  </div>
+{% endblock content %}

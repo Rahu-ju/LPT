@@ -1,0 +1,31 @@
+{% extends 'learning_path_tracker/base.html' %}
+{# load bootstrap tag library #}
+{% load bootstrap4 %}
+
+
+
+{% block content %}
+<div class="row">
+  <div class="col d-flex flex-column align-items-center justify-content-center h-custom">
+
+    <!--Card-->
+    <div class="card border-info">
+      <div class="card-body">
+        <h5 class="card-title info">Write your next goal and take actions.</h5>
+        <p>As everything starts from taking actions. So first set a goal and then take actions..</p>
+    		<form action="{% url 'learning_path_tracker:new_topic' %}" method='post' class="form">
+    			{% csrf_token %}
+    			{% bootstrap_form form %}
+    			{% buttons %}
+    				<button  name='submit' class="btn btn-outline-info btn-custom">Take goal</button>
+    			{% endbuttons %}
+    		</form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+{% endblock content %}

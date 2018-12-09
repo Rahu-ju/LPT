@@ -1,0 +1,30 @@
+{% extends 'learning_path_tracker/base.html' %}
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="row">
+
+  <div class="col">
+    <br><br>
+    <div class="card mb-3 mx-auto w-50 shadow">
+      <br>
+      <h3 class="text-center account">Sign Up to LPT</h3>
+      <div class="card-body">
+        <form action="" method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <input name="next" type="hidden" value="{{next}}">
+          <button class="btn btn-outline-info" type="submit">signup</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'learning_path_tracker/base.html' %}
+{# load bootstrap tag library #}
+{% load bootstrap4 %}
+{% block content %}
+<div class="row">
+  <div class="col d-flex flex-column align-items-center justify-content-center h-custom">
+
+    <h5 class=" info text-center">Edit the steps that you take.</h5>
+
+    <!--card  -->
+    <div class="card shadow">
+      <div class="card-body">
+    		<h5 class="card-title info">{{topic|title}}</h5>
+    		<form action="{% url 'learning_path_tracker:edit_entry' entry.id %}" method= 'post'>
+    			{% csrf_token %}
+    			{% bootstrap_form form %}
+    			<button name="submit" class="btn btn-outline-info btn-custom">Save changes</button>
+    		</form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

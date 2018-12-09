@@ -1,0 +1,86 @@
+/*....navigation menu.... */
+.signLink{
+/* color: rgba(255,255,255,.5); */
+color: #fff;
+text-decoration: none;
+}
+
+.signLink:hover{
+  color: rgba(255,255,255,.8);
+  text-decoration: none;
+}
+.signLink:active{
+
+      text-decoration: none;
+}
+.verticle-line{
+  color: rgba(255,255,255,.5);
+}
+
+/*.... jumbotron section, introduction part */
+.mt-custom{
+    margin-top: 12%;
+}
+.headline{
+  color:#17a2b8!important;
+}
+
+/* color form label */
+.account,label{
+  color: #17a2b8!important;
+}
+
+.account{
+  font-size: 27px;
+  font-weight: 300;
+}
+
+/* contact section */
+.contact-section{
+color: #fff;
+font-size: 12px;
+margin-bottom: : 1%;
+}
+
+.info{
+  color: #17a2b8!important;
+}
+a{
+  text-decoration: none;
+}
+.icon{
+  font-size: 16px;
+}
+.btn-custom{
+  border-radius:1.25rem;
+}
+
+/* For accordian panel */
+.btn-link:hover{
+  text-decoration: none;
+}
+.btn-link:focus{
+  text-decoration: none;
+}
+.card-header-custom{
+  background-color: #fff !important;
+}
+.card-custom{
+  border: none;
+}
+
+/* for vertical aling */
+.h-custom{
+  height: 100vh !important;
+}
+
+/* Alert message  position */
+.alert {
+  z-index:1;
+}
+
+/* custom bootstrap small class*/
+.small-custom{
+  font-size: 67%;
+  font-weight: 200;
+}

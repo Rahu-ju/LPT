@@ -1,0 +1,38 @@
+{% extends 'learning_path_tracker/base.html' %}
+<!-- Load the bootstrap tag library -->
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="row">
+
+  <div class="col">
+  <br><br>
+    <div class="card mb-3 mx-auto w-25 shadow">
+      <br>
+      {{message}}
+      <h3 class="text-center account">Sign in to LTP</h3>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <input name="next" type="hidden" value="{{next}}">
+          <button type="submit" class="btn btn-outline-info">Sign in</button>
+          <a class="float-right" href="{% url 'password_reset' %}">Forget Password?</a>
+        </form>
+      </div>
+    </div>
+    <p class="btn btn-block  w-25 mx-auto shadow">New to here?.<a href="{% url 'signup' %}" > signup</a></p>
+    <br><br><br>
+    <ul class="list-inline text-center" style="margin-bottom:30px;">
+      <li class="list-inline-item">Terms</li>
+      <li class="list-inline-item">Privecy</li>
+      <li class="list-inline-item">Security</li>
+      <li class="list-inline-item">Contact LTP</li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+{% endblock %}
