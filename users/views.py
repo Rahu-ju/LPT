@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
@@ -12,6 +13,7 @@ class SignUp(CreateView):
     form_class = CustomUserCreationForm
     success_url = '/'
 
+    #authenticate user after successful registration
     def form_valid(self, form):
         valid = super(SignUp, self).form_valid(form)
         username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
@@ -19,7 +21,8 @@ class SignUp(CreateView):
         login(self.request, new_user)
         return valid
 
-class UserInfoChange(UpdateView):
+class UserInfoChange(LoginRequiredMixin, UpdateView):
+    login_url = '/users/login/'
     template_name = 'users/settings.html'
     form_class = CustomUserChangeForm
 

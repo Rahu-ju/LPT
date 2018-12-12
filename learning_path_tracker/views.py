@@ -11,6 +11,7 @@ from .forms import TopicForm, EntryForm
 
 #If user created any topic, then it redirect the recent topic Page
 # otherwise redirect the home page
+@login_required(login_url='/users/login/')
 def latest(request):
 	try:
 		topic = Topic.objects.filter(owner=request.user).latest('date_added')
@@ -28,7 +29,6 @@ def latest(request):
 		topic_id = topic.id
 		messages.info(request, 'you are not yet take anysteps on this goal.')
 		return HttpResponseRedirect(reverse('learning_path_tracker:new_entry', args=[topic_id]))
-
 
 
 def index(request):
@@ -51,14 +51,14 @@ def index(request):
 		# 	pass
 	return render(request, 'learning_path_tracker/index.html')
 
-@login_required
+@login_required(login_url='/users/login/')
 def topics(request):
 	'''Show all topics.'''
 	topics = Topic.objects.filter(owner=request.user).order_by('date_added')
 	context = {'topics': topics}
 	return render(request, 'learning_path_tracker/topics.html', context)
 
-@login_required
+@login_required(login_url='/users/login/')
 def topic(request, topic_id):
 	'''Show a single topic and its entries'''
 	#it can help to get the specific topic
@@ -75,7 +75,7 @@ def topic(request, topic_id):
 	context = {'topic':topic, 'entries':entries}
 	return render(request, 'learning_path_tracker/topic.html', context)
 
-@login_required
+@login_required(login_url='/users/login/')
 def new_topic(request):
 	'''Add a new topic.'''
 	if request.method != 'POST':
@@ -96,7 +96,7 @@ def new_topic(request):
 	context = {'form':form}
 	return render(request, 'learning_path_tracker/new_topic.html', context)
 
-@login_required
+@login_required(login_url='/users/login/')
 def new_entry(request, topic_id):
 	'''Add a new entry for a particular topic'''
 	topic = Topic.objects.get(id=topic_id)
@@ -115,7 +115,7 @@ def new_entry(request, topic_id):
 	context = {'topic': topic, 'form':form}
 	return render(request, 'learning_path_tracker/new_entry.html', context)
 
-@login_required
+@login_required(login_url='/users/login/')
 def edit_entry(request, entry_id):
 	''' Edit an existing entry'''
 	entry = Entry.objects.get(id=entry_id)

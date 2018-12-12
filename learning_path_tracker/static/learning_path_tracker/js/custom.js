@@ -38,4 +38,7 @@ setTimeout(function(){
     $('.alert').addClass('animated zoomOut')
 }, 4000);
 
-// 
+// display none for django default form text about field
+$('form-group small').empty()
+
+// Some

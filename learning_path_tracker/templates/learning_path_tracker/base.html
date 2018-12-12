@@ -71,6 +71,11 @@
         </ul>
 
       </div>
+      <ul class="card-text d-inline-flex mr-3">
+        <li class="social-link  shadow rounded-circle"><i class="fab fa-facebook-f"></i></li>
+        <li class="social-link shadow  rounded-circle mx-4"><i class="fab fa-twitter"></i></li>
+        <li class="social-link shadow  rounded-circle"><i class="fab fa-google"></i></li>
+      </ul>
       <ul class="list-inline text-center contact-section mb-1 d-sm-none d-md-block">
         <li class="list-inline-item">Terms</li>
         <li class="list-inline-item">Privecy</li>
@@ -90,6 +95,14 @@
     {# load JavaScript #}
     {% bootstrap_javascript jquery='full' %}
     <script src="{% static 'learning_path_tracker/js/custom.js' %}"></script>
+    <!-- Disable the right click of mouse -->
+    <!-- <script>
+      $(document).bind("contextmenu",function(e) {
+       e.preventDefault();
+        });
+    </script> -->
+
+    </script>
   </body>
 
 </html>

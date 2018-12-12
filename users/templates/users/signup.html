@@ -4,27 +4,30 @@
 
 {% block content %}
 <div class="row">
+  <div class="col d-flex align-items-center justify-content-center h-custom">
 
-  <div class="col">
-    <br><br>
-    <div class="card mb-3 mx-auto w-50 shadow">
-      <br>
-      <h3 class="text-center account">Sign Up to LPT</h3>
+    <!--Card-->
+    <div class="card shadow text-center my-auto" style="width: 28rem;">
       <div class="card-body">
+        <h3 class="card-title">Sign Up</h3>
+        <p class="card-text">This app help you to keep track your learing. <br>Signup with..</p>
+        <ul class="card-text d-inline-flex mr-3">
+          <li class="social-link facebook shadow rounded-circle"><i class="fab fa-facebook-f"></i></li>
+          <li class="social-link shadow twitter rounded-circle mx-4"><i class="fab fa-twitter"></i></li>
+          <li class="social-link shadow google rounded-circle"><i class="fab fa-google"></i></li>
+        </ul>
+        <p class="card-text">or be Classical</p>
+        <br><br>
         <form action="" method="post">
           {% csrf_token %}
           {% bootstrap_form form %}
-          <input name="next" type="hidden" value="{{next}}">
-          <button class="btn btn-outline-info" type="submit">signup</button>
+          <button class="btn btn-outline-info btn-sign mt-3 shadow" type="submit">Signup</button>
+          <p class="card-text small red mt-2">Already have an account? <a class="red" href="{% url 'login' %}">Sign In</a></p>
         </form>
       </div>
     </div>
+    <!-- Card end -->
+
   </div>
-
 </div>
-
-
-
-
-
 {% endblock %}

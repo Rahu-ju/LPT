@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row">
-  <div class="col d-flex flex-column align-items-center justify-content-center h-custom ">
+  <div class="col d-flex justify-content-center align-items-center h-custom">
     {% if user.is_authenticated %}
         {% bootstrap_messages %}
         <div class="card border-info">
@@ -15,7 +15,7 @@
           </div>
         </div>
     {% else %}
-    	<div class="jumbotron">
+    	<div class="jumbotron ">
     	  <h4 class="display-4 headline">Track your learning path..</h4>
     	  <p class="lead">To get success in life you should take a goal that you want to be.</p>
     	  <hr class="my-4">
