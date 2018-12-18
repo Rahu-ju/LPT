@@ -18,7 +18,7 @@ setDefaultActive();
 
 // Show last accordian panel after page load.
 $(document).ready(function(){
- $('.collapse:last').addClass('show');
+ $('.card:last .collapse').addClass('show');
  $('.card:last .small-custom ').append('actions on this day')
 
 });

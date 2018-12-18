@@ -32,51 +32,49 @@
 
 <!-- navigation section start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <div class="navbar-brand">
         {% if user.is_authenticated %}
-          <span class="d-block d-lg-none"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt=""></span>
-          <span class="d-none d-lg-block">
-            <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt=""><br>
-            {{ user.username }}/<a href="{% url 'logout' %}">logout</a>
-          </span>
-        {% else %}
-          <span class="d-block d-lg-none d-md-none"><a class="d-block d-lg-none d-md-none"href="">LPT</a></span>
-          <span class="d-none d-lg-block">
+          <span class="d-block d-sm-none"><img class="img-fluid rounded-circle custom-img" src="https://picsum.photos/g/200/300" alt="image is not loaded"></span>
 
-            <a class="signLink" href="{% url 'login' %}">signin</a> <span class="verticle-line">|</span> <a class="signLink" href="{% url 'signup' %}">signup</a>
-          </span>
+          <a class="d-none d-sm-block" href=""><img class="img-fluid rounded-circle custom-md-img" src="https://picsum.photos/g/200/300" alt="upload"></a><br>
+          <a href="{% url 'logout' %}">logout</a>
+        {% else %}
+          <span class="d-block d-sm-none"><img class="img-fluid rounded-circle custom-img" src="https://picsum.photos/g/200/300" alt="image is not loaded"></span>
+
+          <a class="d-none d-sm-block" href=""><img class="img-fluid rounded-circle custom-md-img" src="https://picsum.photos/g/200/300" alt="upload"></a>
         {% endif %}
-      </a>
+      </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mt-3">
+
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'learning_path_tracker:home' %}">Home</a>
+            <a class="nav-link" href="{% url 'learning_path_tracker:home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'learning_path_tracker:new_topic' %}">Set Goal</a>
+            <a class="nav-link " href="{% url 'learning_path_tracker:new_topic' %}">Set Goal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'learning_path_tracker:recent' %}">Recent</a>
+            <a class="nav-link " href="{% url 'learning_path_tracker:recent' %}">Recent</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'learning_path_tracker:topics' %}">All goals</a>
+            <a class="nav-link " href="{% url 'learning_path_tracker:topics' %}">All goals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="{% url 'updateinfo' %}">settings</a>
+            <a class="nav-link " href="{% url 'updateinfo' %}">settings</a>
           </li>
 
         </ul>
 
       </div>
-      <ul class="card-text d-inline-flex mr-3">
-        <li class="social-link  shadow rounded-circle"><i class="fab fa-facebook-f"></i></li>
-        <li class="social-link shadow  rounded-circle mx-4"><i class="fab fa-twitter"></i></li>
-        <li class="social-link shadow  rounded-circle"><i class="fab fa-google"></i></li>
+      <ul class="list-inline d-none d-sm-block">
+        <li class="list-inline-item social-link  shadow rounded-circle"><i class="fab fa-facebook-f"></i></li>
+        <li class="list-inline-item social-link shadow  rounded-circle mx-4"><i class="fab fa-twitter"></i></li>
+        <li class="list-inline-item social-link shadow  rounded-circle"><i class="fab fa-google"></i></li>
       </ul>
-      <ul class="list-inline text-center contact-section mb-1 d-sm-none d-md-block">
+      <ul class="list-inline text-center contact-section my-2  d-none d-sm-block">
         <li class="list-inline-item">Terms</li>
         <li class="list-inline-item">Privecy</li>
         <li class="list-inline-item">Security</li>
@@ -95,14 +93,17 @@
     {# load JavaScript #}
     {% bootstrap_javascript jquery='full' %}
     <script src="{% static 'learning_path_tracker/js/custom.js' %}"></script>
-    <!-- Disable the right click of mouse -->
-    <!-- <script>
-      $(document).bind("contextmenu",function(e) {
-       e.preventDefault();
-        });
-    </script> -->
+    <script type="text/javascript">
+    //  Disable the right click of mouse
+      // $(document).bind("contextmenu",function(e) {
+      //  e.preventDefault();
+      //   });
+      //
 
+    // Hide menu in mobile
+    // $('.navbar-collapse').removeClass('show');
     </script>
+
   </body>
 
 </html>

@@ -25,7 +25,6 @@ class UserInfoChange(LoginRequiredMixin, UpdateView):
     login_url = '/users/login/'
     template_name = 'users/settings.html'
     form_class = CustomUserChangeForm
-
     success_url = reverse_lazy('learning_path_tracker:home')
 
     def get_object(self, queryset=None):

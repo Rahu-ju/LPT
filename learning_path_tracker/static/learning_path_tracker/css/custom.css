@@ -143,3 +143,18 @@ padding: 14px 22px;
 .red{
   color: #EB4A8A;
 }
+
+/* Profile image for small screen  */
+.custom-img{
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: -9px;
+  margin-top: -8px;
+}
+
+.custom-md-img{
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: -9px;
+  margin-top: -8px;
+}
