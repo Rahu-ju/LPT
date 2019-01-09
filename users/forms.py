@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, UsernameField
 from django import forms
 
-from .models import CustomUser
+from .models import CustomUser, UserProfile
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -24,3 +24,11 @@ class CustomLoginForm(AuthenticationForm):
         widget=forms.PasswordInput,
     )
     password.widget.attrs.update({ "class" : "form-control", 'id' : 'exampleInputEmail12'})
+
+
+# User Profile form
+class UploadPicForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['user','image',]
+        widgets = {'user': forms.HiddenInput()}

@@ -127,7 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'project/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
 #Telling django to use custom User model
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -135,14 +139,6 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # redirect to home page after login or logout
 LOGIN_REDIRECT_URL ='learning_path_tracker:home'
 LOGOUT_REDIRECT_URL = 'learning_path_tracker:home'
-
-#send mail to the terminal
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-#My settings
-# LOGIN_URL = '/users/login'
-
-
 
 #Heroku settings
 # if os.getcwd() == '/app':
@@ -165,8 +161,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 #send sendgrid server configuration..
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = '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'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+# For gmail or google apps
 EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'squalporeover.ju@gmail.com'
+EMAIL_HOST_PASSWORD = 'google.ju@1'
+EMAIL_PORT = 587

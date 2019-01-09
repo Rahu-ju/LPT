@@ -1,10 +1,8 @@
 {% load bootstrap4 %}
-{% load static %}
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -16,12 +14,14 @@
     {# Load bootstrap CSS #}
     {% bootstrap_css %}
 
-
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+    <!--Croppie css  -->
+    <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'learning_path_tracker/css/resume.min.css' %}" rel="stylesheet">
@@ -33,15 +33,14 @@
 <!-- navigation section start -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
       <div class="navbar-brand">
-        {% if user.is_authenticated %}
-          <span class="d-block d-sm-none"><img class="img-fluid rounded-circle custom-img" src="https://picsum.photos/g/200/300" alt="image is not loaded"></span>
-
-          <a class="d-none d-sm-block" href=""><img class="img-fluid rounded-circle custom-md-img" src="https://picsum.photos/g/200/300" alt="upload"></a><br>
-          <a href="{% url 'logout' %}"> logout</a>
+        {% if user.is_authenticated and user.userprofile.image %}
+          <span class="d-block d-sm-none">
+              <img class="img-fluid rounded-circle custom-img" src="{{ user.userprofile.image.url }}" alt="image is not loaded">
+          </span>
+          <img class="d-none d-sm-block img-fluid rounded-circle custom-md-img" src="{{ user.userprofile.image.url }}" alt="upload">
         {% else %}
-          <span class="d-block d-sm-none"><img class="img-fluid rounded-circle custom-img" src="https://picsum.photos/g/200/300" alt="image is not loaded"></span>
-
-          <a class="d-none d-sm-block" href=""><img class="img-fluid rounded-circle custom-md-img" src="https://picsum.photos/g/200/300" alt="upload"></a>
+          <span class="d-block d-sm-none"><a href="{% url 'profile' %}"><img class="img-fluid rounded-circle custom-img" src="https://picsum.photos/g/200/300" alt="image is not loaded"></a></span>
+          <a class="d-none d-sm-block" href="{% url 'profile' %}"><img class="img-fluid rounded-circle custom-md-img" src="https://picsum.photos/g/200/300" alt="upload"></a>
         {% endif %}
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,6 +48,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mt-3">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'learning_path_tracker:home' %}">{{ user.username }}</a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="{% url 'learning_path_tracker:home' %}">Home</a>
@@ -78,6 +80,9 @@
         <li class="list-inline-item">Terms</li>
         <li class="list-inline-item">Privecy</li>
         <li class="list-inline-item">Security</li>
+        {% if user.is_authenticated %}
+        <a class="list-inline-item"  href="{% url 'logout' %}"> logout</a>
+        {% endif %}
         <li class="list-inline-item">Contact LTP</li>
       </ul>
     </nav>
@@ -93,6 +98,8 @@
     {# load JavaScript #}
     {% bootstrap_javascript jquery='full' %}
     <script src="{% static 'learning_path_tracker/js/custom.js' %}"></script>
+    <!--croppie, imgae cropping library js  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js"></script>
     <script type="text/javascript">
     //  Disable the right click of mouse
       // $(document).bind("contextmenu",function(e) {
@@ -102,6 +109,61 @@
 
     // Hide menu in mobile
     // $('.navbar-collapse').removeClass('show');
+    </script>
+
+    <script>
+
+
+      		var $uploadCrop;
+
+      		function readFile(input) {
+       			if (input.files && input.files[0]) {
+      	            var reader = new FileReader();
+
+      	            reader.onload = function (e) {
+      					$('#upload-demo').addClass('ready');
+      	            	$uploadCrop.croppie('bind', {
+      	            		url: e.target.result
+      	            	}).then(function(){
+      	            		console.log('jQuery bind complete');
+      	            	});
+
+      	            }
+
+      	            reader.readAsDataURL(input.files[0]);
+      	        }
+      	        else {
+      		        swal("Sorry - you're browser doesn't support the FileReader API");
+      		    }
+      		}
+
+      		$uploadCrop = $('#upload-demo').croppie({
+      			viewport: {
+      				width: 150,
+      				height: 150,
+      				type: 'circle'
+      			},
+      			enableExif: true,
+            boundary: {
+                width: 140,
+                height: 140,
+            }
+      		});
+
+      		$('#id_image').on('change', function () { readFile(this); });
+      		$('.upload-result').on('click', function (ev) {
+      			$uploadCrop.croppie('result', {
+      				type: 'base64',
+      				size: 'viewport'
+      			}).then(function (src) {
+              console.log(src);
+              // bind the image data to the hidden input id image-data
+        			$('#image-data').val(src);
+              $('#form').submit();
+      			});
+      		});
+
+
     </script>
 
   </body>

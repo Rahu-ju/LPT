@@ -1,11 +1,17 @@
+import base64
+
+from django.core.files.base import ContentFile, File
 from django.shortcuts import render
 from django.views.generic import CreateView, UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UploadPicForm
+from .models import CustomUser, UserProfile
 
 # Create your views here.
 class SignUp(CreateView):
@@ -29,3 +35,49 @@ class UserInfoChange(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+#pic upload view
+@login_required(login_url='/users/login/')
+def user_profile_view(request):
+    '''Handle the image of the user.'''
+    if request.method == 'POST':
+
+        # get the base64 image data
+        image_data = request.POST.get('imagebase64')
+
+        # seperate the image data and format, then decode the image data
+        format, imgstr = image_data.split(';base64,')
+        ext = format.split('/')[-1]
+        decode_image = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+
+        #feed the image to the model instance
+        user = UserProfile(user=request.user, image= decode_image)
+        user.save()
+        messages.success(request, 'your pic updated successfully.')
+        return HttpResponseRedirect(reverse('learning_path_tracker:home'))
+        # if form.is_valid():
+        #
+        #     # get the base64 image data
+        #     image_data = form.cleaned_data['imagebase64']
+        #
+        #     # seperate the image data and format, then decode the image data
+        #     format, imgstr = image_data.split(';base64,')
+        #     ext = format.split('/')[-1]
+        #     decode_image = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+        #
+        #     #feed the image to the form instatnce
+        #     # form.image.save(decode_image, name='temp.' + ext,  save=False)
+        #     # form = UploadPicForm({'user': request.user, 'image': decode_image})
+        #     user = UserProfile(user=request.user, image= decode_image)
+        #     user.save()
+        #     messages.success(request, 'your pic updated successfully.')
+        #     return HttpResponseRedirect(reverse('learning_path_tracker:home'))
+        # else:
+        #     messages.warning(request, "you didn't input valid image. Try again.")
+        #     return HttpResponseRedirect(reverse('learning_path_tracker:home'))
+
+    else:
+        # give initial data to the form
+        form = UploadPicForm(initial={'user': request.user})
+    return render(request, 'users/uploadpic.html', {'form': form})

@@ -1,10 +1,13 @@
 {% extends "learning_path_tracker/base.html" %}
 {% block content %}
 <div class="row">
-	<div class="col d-flex justify-content-center align-content-center h-100">
-		<div class="card shadow mt-3" style="width: 38rem;">
-		  <div class="card-body">
-				<h5 class="card-title info text-center my-3">All the goals that you take..</h5>
+	<div class="col d-flex h-custom">
+	<!--content  -->
+	<div class="mx-auto my-auto" style="width: 50rem;">
+		<!--Card-->
+		<div class="card shadow">
+			<div class="card-body">
+				<h5 class="card-title info text-center my-3">{{user.username | title}}, all the goals that you take..</h5>
 				<a class="btn btn-outline-info btn-custom float-right mr-3" href="{% url 'learning_path_tracker:new_topic' %}" role="button">New goal</a>
 				<br><br>
 				<ul class="list-group list-group-flush">
@@ -14,11 +17,15 @@
 								{{topic}}
 							</a>
 						</li>
-				  	{% empty %}
-				  		<a href="#" class="list-group-item">No topics have been added yet.</a>
+						{% empty %}
+							<a href="#" class="list-group-item">You are not take any goal yet.</a>
 					{% endfor %}
 				</ul>
-		  </div>
+			</div>
+		</div>
+		<!--Card end-->
+	</div>
+	<!--content end  -->
 	</div>
 </div>
 

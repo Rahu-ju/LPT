@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
+from users.models import CustomUser
 
 
 #If user created any topic, then it redirect the recent topic Page

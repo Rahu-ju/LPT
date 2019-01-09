@@ -4,24 +4,27 @@
 
 {% block content %}
 <div class="row">
-	<div class="col d-flex flex-column align-items-center justify-content-center h-custom">
+	<div class="col d-flex h-custom">
+		<!-- content  -->
+			<div class="mx-auto my-auto" style="width: 50rem;" >
+				<!-- alert message -->
+				<div class="messagebox">{% bootstrap_messages %}</div>
 
-			<!-- alert message -->
-			<div class="messagebox">{% bootstrap_messages %}</div>
-
-			<!--Card -->
-			<div class="card shadow" >
-				<div class="card-body">
-					<h5 class="card-title info"><a class="info"href="{% url "learning_path_tracker:topic" topic.id %}">{{topic}}</a></h5>
-					<p>Divide your goal into small steps and take that step every day.</p>
-					<form action="{% url 'learning_path_tracker:new_entry' topic.id %}" method='post' class="form">
-						{% csrf_token %}
-						{% bootstrap_form form %}
-						<button  name='submit' class="btn btn-outline-info btn-custom">Finish</button>
-					</form>
+				<!--Card -->
+				<div class="card shadow">
+					<div class="card-body">
+						<h5 class="card-title info"><a class="info"href="{% url "learning_path_tracker:topic" topic.id %}">{{topic}}</a></h5>
+						<p>Divide your goal into small steps and take that step every day.</p>
+						<form action="{% url 'learning_path_tracker:new_entry' topic.id %}" method='post' class="form">
+							{% csrf_token %}
+							{% bootstrap_form form %}
+							<button  name='submit' class="btn btn-outline-info btn-custom">Finish</button>
+						</form>
+					</div>
 				</div>
+				<!--card end  -->
 			</div>
-
+			<!--content end  -->
 	</div>
 </div>
 {% endblock content %}

@@ -4,26 +4,31 @@
 
 {% block content %}
 <div class="row">
-  <div class="col d-flex justify-content-center align-items-center h-custom">
-    {% if user.is_authenticated %}
-        {% bootstrap_messages %}
-        <div class="card border-info">
-          <div class="card-body ">
-            <h5 class="card-title info text-center">Write, your goal to learn.</h5>
-            <p class="card-text">Take a goal and try to divide that goal into some small steps. So are you ready to take chalenge hit the button</p>
-        		<a class="btn btn-outline-info btn-custom" href="{% url 'learning_path_tracker:new_topic' %}" role="button">Take goal</a>
+  <div class="col d-flex h-custom">
+    <!-- content -->
+    <div class="mx-auto my-auto" style="width: 50rem;">
+      {% if user.is_authenticated %}
+          {% bootstrap_messages %}
+          <div class="card shadow">
+            <div class="card-body ">
+              <h5 class="card-title info text-center">Write, your goal to learn.</h5>
+              <p class="card-text">Take a goal and try to divide that goal into some small steps. So are you ready to take chalenge hit the button</p>
+          		<a class="btn btn-outline-info btn-custom" href="{% url 'learning_path_tracker:new_topic' %}" role="button">Take goal</a>
+            </div>
           </div>
-        </div>
-    {% else %}
-    	<div class="jumbotron ">
-    	  <h4 class="display-4 headline">Track your learning path..</h4>
-    	  <p class="lead">To get success in life you should take a goal that you want to be.</p>
-    	  <hr class="my-4">
-    	  <p>This app help you to write you goal and let you to take notes step by step that you do everyday to reach your goal. After reaching that goal you can get back your note that you take everyday to upgrade youself.</p>
-    	  <a class="btn btn-outline-info btn-custom" href="{% url 'signup' %}" role="button">signup</a>
-        <a class="btn btn-outline-info btn-custom ml-2" href="{% url 'login' %}">signin</a>
-    	</div>
-    {% endif %}
+      {% else %}
+      	<div class="jumbotron ">
+      	  <h4 class="display-4 headline">Track your learning path..</h4>
+      	  <p class="lead">To get success in life you should take a goal that you want to be.</p>
+      	  <hr class="my-4">
+      	  <p>This app help you to write you goal and let you to take notes step by step that you do everyday to reach your goal. After reaching that goal you can get back your note that you take everyday to upgrade youself.</p>
+      	  <a class="btn btn-outline-info btn-custom" href="{% url 'signup' %}" role="button">signup</a>
+          <a class="btn btn-outline-info btn-custom ml-2" href="{% url 'login' %}">signin</a>
+      	</div>
+      {% endif %}
+    </div>
+    <!-- Content end -->
+
   </div>
 </div>
 
