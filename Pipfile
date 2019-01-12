@@ -10,7 +10,8 @@ django = "*"
 gunicorn = "*"
 django-bootstrap4 = "*"
 pillow = "*"
-whitenoise = "*"
+django-storages = "*"
+dropbox = "*"
 
 [requires]
 python_version = "3.5"

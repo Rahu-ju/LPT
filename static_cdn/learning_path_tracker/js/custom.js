@@ -41,4 +41,5 @@ setTimeout(function(){
 // display none for django default form text about field
 $('form-group small').empty()
 
-// Some
+// In pic-upload-form don't display the use field
+// $('.pic-upload-form select').addClass('d-none')
