@@ -39,8 +39,8 @@
           </span>
           <img class="d-none d-sm-block img-fluid rounded-circle custom-md-img" src="{{ user.userprofile.image.url }}" alt="upload">
         {% else %}
-          <span class="d-block d-sm-none"><a href="{% url 'profile' %}"><img class="img-fluid rounded-circle custom-img" src="https://picsum.photos/g/200/300" alt="image is not loaded"></a></span>
-          <a class="d-none d-sm-block" href="{% url 'profile' %}"><img class="img-fluid rounded-circle custom-md-img" src="https://picsum.photos/g/200/300" alt="upload"></a>
+          <span class="d-block d-sm-none"><a href="{% url 'profile' %}"><img class="img-fluid rounded-circle custom-img" src="{% static 'learning_path_tracker/js/img_avatar.png' %}" alt="image is not loaded"></a></span>
+          <a class="d-none d-sm-block" href="{% url 'profile' %}"><img class="img-fluid rounded-circle custom-md-img" src="{% static 'learning_path_tracker/js/img_avatar.png' %}" alt="upload"></a>
         {% endif %}
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
