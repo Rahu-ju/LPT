@@ -11,25 +11,46 @@ from users.models import CustomUser
 
 
 #If user created any topic, then it redirect the recent topic Page
-# otherwise redirect the home page
+# otherwise redirect to the home page
 @login_required(login_url='/users/login/')
 def latest(request):
+	# try:
+	# 	topic = Topic.objects.filter(owner=request.user).latest('date_added')
+	# 	entries = topic.entry_set.order_by('date_added')
+	# 	if entries:
+	# 		context = {'topic': topic, 'entries': entries,}
+	# 	#return HttpResponseRedirect(reverse('learning_path_tracker:topic', args=(str(topic_id))))
+	# 		return render(request, 'learning_path_tracker/topic.html', context)
+	# 	else:
+	# 		topic_id = topic.id
+	# 		messages.info(request, 'you are not yet take anysteps on this goal.')
+	# 		return HttpResponseRedirect(reverse('learning_path_tracker:new_entry', args=[topic_id]))
+	# except ObjectDoesNotExist:
+	# 	topic = Topic.objects.filter(owner=request.user).latest('date_added')
+	# 	topic_id = topic.id
+	# 	messages.info(request, 'you are not yet take anysteps on this goal.')
+	# 	return HttpResponseRedirect(reverse('learning_path_tracker:new_entry', args=[topic_id]))
+
+	# if user create any topic and entries, it redirect to the recent page.
+	# if user didn't create any toppic, redirect to new topic page.
+	# if user create topic but not entries then redirect to that entry page.
+	context = {}
 	try:
 		topic = Topic.objects.filter(owner=request.user).latest('date_added')
+		context['topic'] = topic
+	except ObjectDoesNotExist:
+		messages.info(request, 'you are not take any goal. Take it here.!!')
+		return HttpResponseRedirect(reverse('learning_path_tracker:new_topic'))
+	try:
+		topic = context['topic']
 		entries = topic.entry_set.order_by('date_added')
-		if entries:
-			context = {'topic': topic, 'entries': entries,}
-		#return HttpResponseRedirect(reverse('learning_path_tracker:topic', args=(str(topic_id))))
-			return render(request, 'learning_path_tracker/topic.html', context)
-		else:
-			topic_id = topic.id
-			messages.info(request, 'you are not yet take anysteps on this goal.')
-			return HttpResponseRedirect(reverse('learning_path_tracker:new_entry', args=[topic_id]))
+		context['entries'] = entries
 	except ObjectDoesNotExist:
 		topic = Topic.objects.filter(owner=request.user).latest('date_added')
 		topic_id = topic.id
-		messages.info(request, 'you are not yet take anysteps on this goal.')
+		messages.info(request, 'you are not yet take anysteps on this goal. Take it here.!!')
 		return HttpResponseRedirect(reverse('learning_path_tracker:new_entry', args=[topic_id]))
+	return render(request, 'learning_path_tracker/topic.html', context)
 
 
 def index(request):
@@ -42,7 +63,7 @@ def index(request):
 			topic = Topic.objects.filter(owner=request.user).latest('date_added')
 			return HttpResponseRedirect(reverse('learning_path_tracker:recent'))
 		except Topic.DoesNotExist:
-			messages.warning(request, 'You are not yet take any goal.Take one first.')
+			messages.info(request, 'You are not yet take any goal. Take it now.!!')
 			return render(request, 'learning_path_tracker/index.html')
 		# try:
 		# 	topic = Topic.objects.filter(owner=user).latest('date_added')
