@@ -65,7 +65,11 @@
           <li class="nav-item">
             <a class="nav-link " href="{% url 'updateinfo' %}">settings</a>
           </li>
-
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link d-block d-sm-none" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% endif %}
         </ul>
 
       </div>
