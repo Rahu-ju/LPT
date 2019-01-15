@@ -138,10 +138,8 @@ if not DEBUG:
     # Default file storage by drpbox
     STATICFILES_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-    DROPBOX_OAUTH2_TOKEN = 'q22EUto9UmAAAAAAAAAACkbZNNvvSuYTGjSJF1gilUujGaySwN-rbxVPp0sBM_df'
+    DROPBOX_OAUTH2_TOKEN = 'q22EUto9UmAAAAAAAAAAGsxVAOuKmglS2bTPAOzqWvI4_2nJ7y-qlxLIed0NJ0vG'
     DROPBOX_ROOT_PATH = 'media'
-    DROPBOX_CONSUMER_KEY = 'gr2qulh9syswvb9'
-    DROPBOX_CONSUMER_SECRET = 'nkf0czqdpam39km'
 
 
 # # Simplified static file serving.
