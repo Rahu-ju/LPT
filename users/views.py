@@ -51,32 +51,12 @@ def user_profile_view(request):
         ext = format.split('/')[-1]
         decode_image = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
 
-        #feed the image to the model instance
+        #feed the image to the model instance and save
         user = UserProfile(user=request.user, image= decode_image)
         user.save()
         messages.success(request, 'your pic updated successfully.')
         return HttpResponseRedirect(reverse('learning_path_tracker:home'))
-        # if form.is_valid():
-        #
-        #     # get the base64 image data
-        #     image_data = form.cleaned_data['imagebase64']
-        #
-        #     # seperate the image data and format, then decode the image data
-        #     format, imgstr = image_data.split(';base64,')
-        #     ext = format.split('/')[-1]
-        #     decode_image = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
-        #
-        #     #feed the image to the form instatnce
-        #     # form.image.save(decode_image, name='temp.' + ext,  save=False)
-        #     # form = UploadPicForm({'user': request.user, 'image': decode_image})
-        #     user = UserProfile(user=request.user, image= decode_image)
-        #     user.save()
-        #     messages.success(request, 'your pic updated successfully.')
-        #     return HttpResponseRedirect(reverse('learning_path_tracker:home'))
-        # else:
-        #     messages.warning(request, "you didn't input valid image. Try again.")
-        #     return HttpResponseRedirect(reverse('learning_path_tracker:home'))
-
+        
     else:
         # give initial data to the form
         form = UploadPicForm(initial={'user': request.user})

@@ -2,9 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-# def upload_location(instance, filename):
-#     return "%s/%s" % (instance.id, filename)
-
 #  models here.
 class CustomUser(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True)
@@ -17,7 +14,7 @@ class UserProfile(models.Model):
          on_delete=models.CASCADE,
     )
     image = models.ImageField(upload_to='media/')
-    
+
 
     def __str__(self):
         return self.user.email

@@ -22,7 +22,6 @@ urlpatterns = [
     #user profile
     path('profile/', user_profile_view, name='profile')
 
-    # path('', include('django.contrib.auth.urls')),
 
 
 ]

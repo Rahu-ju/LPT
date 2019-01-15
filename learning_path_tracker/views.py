@@ -10,27 +10,8 @@ from .forms import TopicForm, EntryForm
 from users.models import CustomUser
 
 
-#If user created any topic, then it redirect the recent topic Page
-# otherwise redirect to the home page
 @login_required(login_url='/users/login/')
 def latest(request):
-	# try:
-	# 	topic = Topic.objects.filter(owner=request.user).latest('date_added')
-	# 	entries = topic.entry_set.order_by('date_added')
-	# 	if entries:
-	# 		context = {'topic': topic, 'entries': entries,}
-	# 	#return HttpResponseRedirect(reverse('learning_path_tracker:topic', args=(str(topic_id))))
-	# 		return render(request, 'learning_path_tracker/topic.html', context)
-	# 	else:
-	# 		topic_id = topic.id
-	# 		messages.info(request, 'you are not yet take anysteps on this goal.')
-	# 		return HttpResponseRedirect(reverse('learning_path_tracker:new_entry', args=[topic_id]))
-	# except ObjectDoesNotExist:
-	# 	topic = Topic.objects.filter(owner=request.user).latest('date_added')
-	# 	topic_id = topic.id
-	# 	messages.info(request, 'you are not yet take anysteps on this goal.')
-	# 	return HttpResponseRedirect(reverse('learning_path_tracker:new_entry', args=[topic_id]))
-
 	# if user create any topic and entries, it redirect to the recent page.
 	# if user didn't create any toppic, redirect to new topic page.
 	# if user create topic but not entries then redirect to that entry page.
@@ -56,21 +37,15 @@ def latest(request):
 def index(request):
 	'''The home page for learning log.'''
 
+	# If user have any goal then redirect the user to the recent page
+	# otherwise to home Page
 	if request.user.is_authenticated:
-		# If user have any goal then redirect the user to the recent page
-		# otherwise to home Page
 		try:
 			topic = Topic.objects.filter(owner=request.user).latest('date_added')
 			return HttpResponseRedirect(reverse('learning_path_tracker:recent'))
 		except Topic.DoesNotExist:
 			messages.info(request, 'You are not yet take any goal. Take it now.!!')
 			return render(request, 'learning_path_tracker/index.html')
-		# try:
-		# 	topic = Topic.objects.filter(owner=user).latest('date_added')
-		# 	topic_id = topic.id
-		# 	return HttpResponseRedirect(reverse('learning_path_tracker:topic', args=(str(topic_id))))
-		# except Topic.DoesNotExist:
-		# 	pass
 	return render(request, 'learning_path_tracker/index.html')
 
 @login_required(login_url='/users/login/')
@@ -83,8 +58,6 @@ def topics(request):
 @login_required(login_url='/users/login/')
 def topic(request, topic_id):
 	'''Show a single topic and its entries'''
-	#it can help to get the specific topic
-	#topic = Topic.objects.get(id=topic_id)
 
 	#It can help to get the topic and fi topic not in the database it call 404.html in the main template
 	topic = get_object_or_404(Topic, id=topic_id)
@@ -92,7 +65,6 @@ def topic(request, topic_id):
 	# Make sure the topic belongs to the current user.
 	if topic.owner != request.user:
 		raise Http404
-
 	entries = topic.entry_set.order_by('date_added')
 	context = {'topic':topic, 'entries':entries}
 	return render(request, 'learning_path_tracker/topic.html', context)
@@ -101,7 +73,7 @@ def topic(request, topic_id):
 def new_topic(request):
 	'''Add a new topic.'''
 	if request.method != 'POST':
-		#No data submitted; create a blank form.
+		# Create a blank form.
 		form = TopicForm()
 	else:
 		#POST data submitted; process data.
