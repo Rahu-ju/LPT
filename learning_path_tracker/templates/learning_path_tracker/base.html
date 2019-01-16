@@ -67,7 +67,7 @@
           </li>
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link d-block d-sm-none" href="{% url 'logout' %}">Logout</a>
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
           {% endif %}
         </ul>
@@ -80,11 +80,8 @@
       </ul>
       <ul class="list-inline text-center contact-section my-2  d-none d-sm-block">
         <li class="list-inline-item">Terms</li>
-        <li class="list-inline-item">Privecy</li>
+        <li class="list-inline-item">Privacy</li>
         <li class="list-inline-item">Security</li>
-        {% if user.is_authenticated %}
-        <a class="list-inline-item"  href="{% url 'logout' %}"> logout</a>
-        {% endif %}
         <li class="list-inline-item">Contact LTP</li>
       </ul>
     </nav>
