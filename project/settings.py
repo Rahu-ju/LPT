@@ -135,10 +135,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
 if not DEBUG:
-    # Default file storage by drpbox
+    # Default file storage  provide by drpbox
     STATICFILES_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-    DROPBOX_OAUTH2_TOKEN = 'q22EUto9UmAAAAAAAAAAGsxVAOuKmglS2bTPAOzqWvI4_2nJ7y-qlxLIed0NJ0vG'
+    DROPBOX_OAUTH2_TOKEN = '.....'
     DROPBOX_ROOT_PATH = 'media'
 
 
@@ -153,23 +153,6 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL ='learning_path_tracker:home'
 LOGOUT_REDIRECT_URL = 'learning_path_tracker:home'
 
-#Heroku settings
-# if os.getcwd() == '/app':
-#     import dj_database_url
-#     DATABASES = {
-#         'dafault' : dj_database_url.config(default='postgres://localhost')
-#     }
-#
-#     #honor the 'X-Forwarded-proto' headerfor request.is_secure().
-#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#
-#     #Allow only heroku to host the project.
-#     ALLOWED_HOSTS = ['learning-log.heroku.com']
-#
-#     DEBUG = False
-#
-# django_heroku.settings(locals())
-
 # for email backends
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -183,6 +166,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # For gmail or google apps
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'squalporeover.ju@gmail.com'
-EMAIL_HOST_PASSWORD = 'google.ju@1'
+EMAIL_HOST_USER = 'your gmail address'
+EMAIL_HOST_PASSWORD = 'your mail password'
 EMAIL_PORT = 587
