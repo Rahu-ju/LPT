@@ -28,7 +28,7 @@ SECRET_KEY = 'ewpis--2nm&$8fo^#q8z+-th_6hqrnnv$1@-5!tf2k19ld1vyz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['rahu.pythonanywhere.com']
 
 
 # Application definition
