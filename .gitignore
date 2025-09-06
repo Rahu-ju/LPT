@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+
+
+# Virtual environment
+venv/
+
+# SQLite database
+db.sqlite3
+db.sqlite3-journal
+
+# Django stuff
+*.log
+static_cdn/
+media_cdn/
+
+# Environment variables
+*.env
+

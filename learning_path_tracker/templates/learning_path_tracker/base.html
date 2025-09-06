@@ -1,5 +1,5 @@
 {% load bootstrap4 %}
-{% load static from staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -67,7 +67,12 @@
           </li>
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              
+              <form action="{% url 'logout' %}" method="post" style="display: inline-block;"> 
+                {% csrf_token %}
+                <button type="submit" class="nav-link btn btn-link" style="padding:0; border:none; background:none;">Logout</button>
+              </form>
+
             </li>
           {% endif %}
         </ul>
@@ -103,9 +108,9 @@
     <script src="{% static 'learning_path_tracker/js/croppie_custom.js' %}"></script>
     <script type="text/javascript">
      // Disable the right click of mouse
-      $(document).bind("contextmenu",function(e) {
-       e.preventDefault();
-        });
+     // $(document).bind("contextmenu",function(e) {
+     //  e.preventDefault();
+      //  });
 
     // // Hide menu in mobile
     // $('.navbar-collapse').removeClass('show');
